@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title  class="ion-text-center" >Ver Usuario</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button> 
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container" *ngIf="usuario">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Datos del Usuario</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>DNI:</strong> {{ usuario.dni }}</p>
+        <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ usuario.apellido }}</p>
+        <p><strong>Dirección:</strong> {{ usuario.direccion }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="usuario.AFIP">
+      <ion-card-header>
+        <ion-card-title>AFIP</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>CUIT:</strong> {{ usuario.AFIP?.cuit }}</p>
+        <p><strong>Clave Fiscal:</strong> {{ usuario.AFIP?.claveFiscal }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="usuario.certIngreso">
+      <ion-card-header>
+        <ion-card-title>Certificación de Ingresos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Año:</strong> {{ usuario.certIngreso.anio }}</p>
+          <a [href]="usuario.certIngresof" target="_blank">Ver Certificación de ingresos</a>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="usuario.declaracionJurada">
+      <ion-card-header>
+        <ion-card-title>Declaración Jurada</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+      <!-- <p><strong>Cliente:</strong> {{ usuario.declaracionJurada.cliente }}</p> -->
+        <a [href]="usuario.declaracionJurada.pdf" target="_blank">Ver Declaración Jurada</a>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card *ngIf="usuario.facturacion">
+      <ion-card-header>
+        <ion-card-title>Facturación</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+       <!-- <p><strong>Cliente:</strong> {{ usuario.facturacion.cliente }}</p> -->
+        <a [href]="usuario.facturacion.pdf" target="_blank">Ver Facturacion</a>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="usuario.planPago">
+      <ion-card-header>
+        <ion-card-title>Plan de Pago</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <a [href]="usuario.planPago.pdf" target="_blank">Ver Plan de Pago</a>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <div *ngIf="!usuario">
+    <ion-spinner name="crescent"></ion-spinner> <p>Cargando datos del usuario...</p>
+  </div>
+</ion-content>
